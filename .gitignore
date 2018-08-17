@@ -1,0 +1,6 @@
+**/nimcache
+nimsuggest.log
+tests/*
+!tests/*.nim
+!tests/*.nims
+src/tipsNim
