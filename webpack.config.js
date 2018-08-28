@@ -3,7 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     mode: 'development',
-    entry: './src/main.ts',
+    entry: './client/main.ts',
     output: {
         path: `${__dirname}/server/assets/dist`,
         filename: 'bundle.js'
@@ -16,7 +16,7 @@ module.exports = {
             },
             {
                 test: /\.ts$/,
-                include: `${__dirname}/src`,
+                include: `${__dirname}/client`,
                 loader: 'ts-loader',
                 options: {
                     appendTsSuffixTo: [/\.vue$/]
@@ -39,7 +39,7 @@ module.exports = {
         ],
         alias: {
             vue$: 'vue/dist/vue.js',
-            '@': `${__dirname}/src`
+            '@': `${__dirname}/client`
         }
     },
     plugins: [
