@@ -7,7 +7,7 @@ import
 let handler = choose(
     # subRoute("/",           signin.handlers),
     # subRoute("/home/",      mustBeAuth >=> choose(home.handlers)),
-    serveDir("/", "./assets/dist/", 60 * 60 * 24 * 7),
+    serveDir("/", "./assets/dist/", 0),
     NOTFOUND >=> view "./assets/index.html",
 )
 

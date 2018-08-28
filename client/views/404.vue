@@ -1,6 +1,6 @@
 <template>
     <div class="404-container">
-        <h1>404 not found</h1>
+        <h1>404 Not Found</h1>
     </div>
 </template>
 
@@ -8,6 +8,6 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "404"
+  name: "notfound"
 });
 </script>
