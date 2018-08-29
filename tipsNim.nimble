@@ -4,8 +4,8 @@ version       = "0.1.0"
 author        = "shch"
 description   = "tips"
 license       = "MIT"
-srcDir        = "src"
-binDir        = "src"
+srcDir        = "server"
+binDir        = "server"
 bin           = @["tipsNim"]
 
 # Dependencies
@@ -15,13 +15,13 @@ requires "alpaka >= 0.1.0"
 
 
 task clean, "clean":
-    exec "rm -rf ./src/tipsNim"
-    exec "rm -rf ./src/nimcache"
+    exec "rm -rf ./server/tipsNim"
+    exec "rm -rf ./server/nimcache"
     
 task exec, "exec":
-#    exec "rm -rf ./bin"
     exec "nimble build"
 #    exec "cp -a ./src/assets/ ./bin/assets/"
 #    exec "cp -a ./src/views/ ./bin/views/"
-    exec "./src/tipsNim"
+    exec "npm run build"
+    exec "./server/tipsNim"
 

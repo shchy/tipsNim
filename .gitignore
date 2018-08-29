@@ -3,4 +3,9 @@ nimsuggest.log
 tests/*
 !tests/*.nim
 !tests/*.nims
-src/tipsNim
+server/assets/dist/*
+server/tipsNim
+
+**/node_modules
+**/dist
+**/.DS_Store
