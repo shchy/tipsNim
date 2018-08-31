@@ -12,7 +12,10 @@ export default new Router({
         },
         {
             path: '/',
-            component: () => import('@/views/debug.vue'),
+            components: {
+                default: () => import('@/views/debug.vue'),
+                side: () => import('@/views/side.vue'),
+            }
         },
         {
             path: '*',

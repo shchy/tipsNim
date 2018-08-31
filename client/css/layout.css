@@ -1,36 +1,30 @@
 #app {
-    display: flex;
     /* min-height: 100vh; */
     height: 100vh;
-    flex-direction: column;   
+    display: flex;
+    flex: 1;
 }
-
-header, footer{
-    flex: 0
+.side-nav{
+    width: 200px;
+    overflow-y: scroll;
+    order: -1;
 }
 
 .content{
     display: flex;
-    flex: 1;
+    flex-direction: column;   
+    flex: 1 
 }
 
+header{
+    flex: 0
+}
 .main {
     flex: 1;
     overflow-y: scroll;
 }
 
-
-.side-nav,
-.side-bar{
-  width: 200px;
-}
-
-.side-nav {
-  order: -1;
-}
-
-
-header, footer{
+header{
     background: orange
 }
 

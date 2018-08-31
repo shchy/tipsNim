@@ -13,15 +13,19 @@
 
 <body>
     <div id="app">
-        <header>header</header>
+        <nav class="side-nav">
+            <router-view name="side"></router-view>    
+        </nav>    
         <div class="content">
+            <header>header</header>
             <main class="main">
                 <router-view></router-view>
             </main>
-            <nav class="side-nav">nav</nav>
-            <aside class="side-bar">side</aside>
+            
+            <!-- <aside class="side-bar">side</aside> -->
+            <!-- <footer>footer</footer> -->
         </div>
-        <footer>footer</footer>
+        
     </div>
 </body>
 
