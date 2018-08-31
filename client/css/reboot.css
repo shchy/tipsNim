@@ -18,6 +18,7 @@
    -ms-text-size-adjust: 100%;
    -ms-overflow-style: scrollbar;
    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+   touch-action: manipulation;
  }
  
  @-ms-viewport {
@@ -320,8 +321,8 @@
    display: list-item;
    cursor: pointer;
  }
- 
- template {
+
+ template {                                                                                                         
    display: none;
  }
  

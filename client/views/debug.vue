@@ -4,6 +4,11 @@
         <my-component message="My Counter for TypeScript"></my-component>
         <router-link to="/login">Test</router-link>
         <button @click="handleLogin" >Test</button>
+        <ul>
+          <li v-for="i in 100">
+            {{i}}
+          </li>
+        </ul>
     </div>
 </template>
 
@@ -21,6 +26,7 @@ h2 {
 .debug-container {
   text-align: center;
 }
+
 </style>
 <script lang="ts">
 import Vue from "vue";

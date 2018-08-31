@@ -1,0 +1,42 @@
+#app {
+    display: flex;
+    /* min-height: 100vh; */
+    height: 100vh;
+    flex-direction: column;   
+}
+
+header, footer{
+    flex: 0
+}
+
+.content{
+    display: flex;
+    flex: 1;
+}
+
+.main {
+    flex: 1;
+    overflow-y: scroll;
+}
+
+
+.side-nav,
+.side-bar{
+  width: 200px;
+}
+
+.side-nav {
+  order: -1;
+}
+
+
+header, footer{
+    background: orange
+}
+
+nav{
+    background: lightgreen
+}
+aside{
+    background: green
+}
