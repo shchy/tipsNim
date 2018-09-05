@@ -1,8 +1,10 @@
 <template>
     <div class="side-container">
         <h1>SideMenu</h1>
-        <router-link to="/login">Test</router-link>
         <ul>
+          <li><router-link to="/">Top</router-link></li>
+          <li><router-link to="/login">Test</router-link></li>
+
           <li v-for="i in 100">
             {{i}}
           </li>

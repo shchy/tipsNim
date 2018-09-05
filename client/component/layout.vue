@@ -1,8 +1,9 @@
 <template>
     <div id="layout">
         <nav class="side-nav" :class="{isOpenMenu: isOpenMenu}">
-            <a href="#" @click="closeMenu">x</a>
-            <router-view name="side"></router-view>    
+
+            <a id="side-close" href="#" @click="closeMenu">x</a>
+            <router-view id="side-content" name="side"></router-view>    
         </nav>    
         <div class="content">
             <header>
@@ -31,7 +32,6 @@ export default Vue.extend({
         closeMenu: function (){
             this.isOpenMenu = false;
         }
-
     }
 });
 
@@ -40,28 +40,44 @@ export default Vue.extend({
 
 <style scoped>
 #layout {
-    /* min-height: 100vh; */
     height: 100vh;
     display: flex;
-    flex: 1;
 }
 
-.side-nav{           
+.side-nav{     
+    position: absolute;
+    height: 100vh;
+    background: #fff;
+    border-right: 1px solid #333;
     width: 0px;
     overflow-y: scroll;
     order: -1;
-    transition: all 100ms 0s ease;
+    transition: width 100ms 0s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+#side-close {
+    align-self: flex-end;
+    padding-top: 1rem;
+    padding-right: 1rem;
+}
+
+#side-content {
+    padding-left: 1rem;
+    overflow-y: scroll;
 }
 
 .isOpenMenu{
     width: 200px;
-    transition: all 300ms 0s ease;
+    transition: width 300ms 0s ease;
 }
 
 .content{
     display: flex;
-    flex-direction: column;   
-    flex: 1 
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem;
 }
 
 header{
