@@ -7,6 +7,7 @@
         <div class="content">
             <header>
                 <a id="side-open" href="#" @click="openMenu">menu</a>
+                <router-view id="header-content" name="header"></router-view>
             </header>
             <main class="main">
                 <router-view></router-view>
@@ -85,15 +86,26 @@ export default Vue.extend({
 }
 
 .content{
-    display: flex;
-    flex-direction: column;
     flex: 1;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 header{
-    flex: 0
+    height: auto;
+    display: flex;
 }
+
+#side-open {
+    width: auto;
+    margin-right: 1rem;
+}
+
+#header-content {
+    flex: 1;
+}
+
 .main {
     flex: 1;
     overflow-y: scroll;
