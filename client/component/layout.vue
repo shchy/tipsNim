@@ -1,7 +1,6 @@
 <template>
     <div id="layout">
         <nav class="side-nav" :class="{isOpenMenu: isOpenMenu}">
-
             <a id="side-close" href="#" @click="closeMenu">x</a>
             <router-view id="side-content" name="side"></router-view>    
         </nav>    
@@ -32,7 +31,12 @@ export default Vue.extend({
         closeMenu: function (){
             this.isOpenMenu = false;
         }
+    },
+    watch:{
+    $route (to, from){
+        this.isOpenMenu = false;
     }
+} 
 });
 
 </script>
@@ -42,6 +46,13 @@ export default Vue.extend({
 #layout {
     height: 100vh;
     display: flex;
+    
+    /*background-image: url(https://www.webfx.com/blog/images/assets/cdn.sixrevisions.com/0431-01_responsive_background_image_demo/images/background-photo.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;*/
 }
 
 .side-nav{     
@@ -59,7 +70,7 @@ export default Vue.extend({
 
 #side-close {
     align-self: flex-end;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     padding-right: 1rem;
 }
 
@@ -87,14 +98,17 @@ header{
     flex: 1;
     overflow-y: scroll;
 }
-/*
-header{
-    background: orange
-}
 
-nav{
-    background: lightgreen
+@media screen and (min-width: 768px) {
+    .side-nav{     
+        width: 200px;
+    }
+    #side-close{
+        display: none;
+    }
+    #side-content {
+        padding-top: 1rem;
+    }
+   
 }
-*/
-
 </style>
