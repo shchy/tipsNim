@@ -12,7 +12,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 body {
   background: #eee;
   font-family: "Roboto", sans-serif;

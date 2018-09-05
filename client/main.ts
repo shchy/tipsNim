@@ -1,10 +1,13 @@
 import Vue from 'vue';
 import router from './router';
+import layout from '@/component/layout.vue'
 
 import '@/css/reboot.css'
-import '@/css/layout.css'
 
 new Vue({
-    router
+    router,
+    components:{
+        'root-layout': layout
+    } 
 }).$mount('#app');
 
