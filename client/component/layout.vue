@@ -6,7 +6,7 @@
         </nav>    
         <div class="content">
             <header>
-                <a href="#" @click="openMenu">menu</a>
+                <a id="side-open" href="#" @click="openMenu">menu</a>
             </header>
             <main class="main">
                 <router-view></router-view>
@@ -100,10 +100,13 @@ header{
 }
 
 @media screen and (min-width: 768px) {
-    .side-nav{     
+
+    .side-nav{
+        position: relative;
+     
         width: 200px;
     }
-    #side-close{
+    #side-close, #side-open{
         display: none;
     }
     #side-content {
