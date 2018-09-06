@@ -14,3 +14,14 @@ https://github.com/shchy/alpaka
 
 vscodeはarm64でビルドできるようにするPRがあるのでそれを使って自分でビルドするとイケる。
 https://github.com/ava1ar/vscode
+
+# 2018/09/06
+chromebookのcrostiniのvscodeのウィンドウの描画が壊れた。
+devチャネルのバグらしいけど、１週間くらい何もできなくなったのでbetaに下げて復帰。
+
+webのfront側ってそのうち何かに置き換わるんじゃねと思ってたけど全然htmlとjavascriptとcssのままでなんなの。
+webアセンブリのフレームワークでラップされて実質html駆逐される未来ありそうだけど、front勉強してみよ。
+
+めちゃおもしろいし。
+
+
