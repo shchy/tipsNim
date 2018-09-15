@@ -1,7 +1,7 @@
 echo $digital_ip
 expect -c "
     set timeout 30
-    spawn ssh root@$digital_ip 'pwd'
+    spawn ssh root@$digital_ip 'ls -a'
     expect ":"
     send \"yes\n\"
     
