@@ -5,7 +5,7 @@ expect -c "
     expect ":"
     send \"yes\n\"
     
-    expect ":"
+    expect "password:"
     send \"$digital_pass\n\"
     interact
     "
