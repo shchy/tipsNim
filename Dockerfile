@@ -9,7 +9,7 @@ RUN cd ../
 RUN git clone https://github.com/shchy/tipsNim.git
 RUN cd tipsNim
 RUN npm i -y
-RUN nimble build
+RUN nimble build -y
 
 EXPOSE 8080
 
