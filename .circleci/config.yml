@@ -10,7 +10,7 @@ jobs:
           command: echo Hello, world.
       - run:
           name: test
-          command: echo $digital_ip
+          command: echo $digital_ip && sudo apt install expect
       - run:
           name: deploy
           command: bash .circleci/deploy-ssh.sh
