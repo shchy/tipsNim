@@ -9,4 +9,3 @@ expect -c "
     send \"$digital_pass\n\"
     interact
     "
-# 'bash -s' < .circleci/deploy.sh
