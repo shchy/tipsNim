@@ -6,10 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Greeting
-          command: echo Hello, world.
-      - run:
-          name: test
+          name: install commands 
           command: echo $digital_ip && apt update && apt install expect openssh-client -y
       - run:
           name: deploy
