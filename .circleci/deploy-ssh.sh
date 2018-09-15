@@ -1,7 +1,7 @@
 echo $digital_ip
 expect -c "
     set timeout 30
-    spawn ssh root@$digital_ip 'ls -a'
+    spawn ssh root@$digital_ip `cat .circleci/deploy.sh`
     expect ":"
     send \"yes\n\"
     
