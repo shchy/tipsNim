@@ -9,3 +9,4 @@ RUN cd tipsNim && npm i -y && nimble build -y
 
 EXPOSE 8080
 
+CMD cd tipsNim && nimble exec
