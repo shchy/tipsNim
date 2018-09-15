@@ -1,0 +1,51 @@
+language: c
+sudo: required
+
+env:
+  # Build and test against the master and devel branches of Nim
+  - BRANCH=master
+  
+compiler:
+  # Build and test using both gcc and clang
+  - gcc
+  - clang
+
+install:
+  - |
+    if [ ! -x nim-$BRANCH/bin/nim ]; then
+      git clone -b $BRANCH --depth 1 git://github.com/nim-lang/nim nim-$BRANCH/
+      cd nim-$BRANCH
+      git clone --depth 1 git://github.com/nim-lang/csources csources/
+      cd csources
+      sh build.sh
+      cd ..
+      rm -rf csources
+      bin/nim c koch
+      ./koch boot -d:release
+    else
+      cd nim-$BRANCH
+      git fetch origin
+      if ! git merge FETCH_HEAD | grep "Already up-to-date"; then
+        bin/nim c koch
+        ./koch boot -d:release
+      fi
+    fi
+    cd ..
+  - export PATH="nim-$BRANCH/bin${PATH:+:$PATH}"
+  - apt install npm -y
+  - git clone https://github.com/shchy/alpaka.git && cd alpaka && nimble develop -y && cd ../
+script: 
+  - npm i -y && nimble build -y
+
+# deploy:
+#   provider: releases
+#   api_key: "＜GitHubのOAuthトークン＞"
+#   file: "＜アップロードするファイル＞"
+#   skip_cleanup: true
+#   on:
+#     tags: true
+
+# blocklist
+branches:
+  except:
+  - gh-pages
