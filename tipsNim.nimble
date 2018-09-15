@@ -10,7 +10,7 @@ bin           = @["tipsNim"]
 
 # Dependencies
 
-requires "nim >= 0.17.2"
+requires "nim >= 0.18.0"
 requires "alpaka >= 0.1.0"
 
 
