@@ -13,4 +13,4 @@ jobs:
           command: date
       - run:
           name: deploy
-          command: ./deploy-ssh.sh
+          command: .circleci/deploy-ssh.sh
