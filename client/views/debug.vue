@@ -1,6 +1,6 @@
 <template>
     <div class="debug-container">
-        <h1>Hello Vue.js!</h1>
+        <h1>Hello Vue.js! test</h1>
         <my-component message="My Counter for TypeScript"></my-component>
         <router-link to="/login">Test</router-link>
         <button @click="handleLogin" >Test</button>

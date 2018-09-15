@@ -1,6 +1,5 @@
-echo "stop docker container"
-
-docker ps -a -q | xargs docker stop
+echo "stop docker container" 
+docker ps -a -q | xargs docker stop 
 docker ps -a -q | xargs docker rm
 
 echo clean
