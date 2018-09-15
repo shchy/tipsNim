@@ -35,10 +35,15 @@ install:
 script: 
   - npm i -y && nimble build -y
 
-deploy:
-  provider: releases
-  api_key: "＜GitHubのOAuthトークン＞"
-  file: "＜アップロードするファイル＞"
-  skip_cleanup: true
-  on:
-    tags: true
+# deploy:
+#   provider: releases
+#   api_key: "＜GitHubのOAuthトークン＞"
+#   file: "＜アップロードするファイル＞"
+#   skip_cleanup: true
+#   on:
+#     tags: true
+
+# blocklist
+branches:
+  except:
+  - gh-pages
