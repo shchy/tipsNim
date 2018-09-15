@@ -23,6 +23,6 @@ li {
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "head"
+  name: "header-menu"
 });
 </script>

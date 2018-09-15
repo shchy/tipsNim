@@ -1,10 +1,10 @@
 <template>
     <div id="layout">
-        <nav class="side-nav" :class="{isOpenMenu: isOpenMenu}">
+        <nav class="side-nav" v-bind:isOpenMenu="isOpenMenu">
             <a id="side-close" href="#" @click="closeMenu">x</a>
             <router-view id="side-content" name="side"></router-view>    
         </nav>    
-        <div class="content">
+        <div class="content" v-bind:isOpenMenu="isOpenMenu">
             <header>
                 <a id="side-open" href="#" @click="openMenu">menu</a>
                 <router-view id="header-content" name="header"></router-view>
@@ -60,7 +60,7 @@ export default Vue.extend({
     position: absolute;
     height: 100vh;
     background: #fff;
-    border-right: 1px solid #333;
+    /*border-right: 1px solid #333;*/
     width: 0px;
     overflow-y: scroll;
     order: -1;
@@ -80,7 +80,7 @@ export default Vue.extend({
     overflow-y: scroll;
 }
 
-.isOpenMenu{
+.side-nav[isOpenMenu]{
     width: 200px;
     transition: width 300ms 0s ease;
 }
@@ -91,6 +91,12 @@ export default Vue.extend({
     display: flex;
     flex-direction: column;
 }
+
+.content[isOpenMenu]{
+    transform: translateX(200px);
+    transition: transform 300ms 0s ease;
+}
+
 
 header{
     height: auto;
