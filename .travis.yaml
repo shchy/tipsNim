@@ -32,7 +32,8 @@ install:
     fi
     cd ..
   - export PATH="nim-$BRANCH/bin${PATH:+:$PATH}"
-  - ./ci/install.sh
+  - apt install npm -y
+  - git clone https://github.com/shchy/alpaka.git && cd alpaka && nimble develop -y && cd ../
 script: 
   - npm i -y && nimble build -y
 
