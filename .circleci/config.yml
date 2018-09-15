@@ -9,8 +9,8 @@ jobs:
           name: Greeting
           command: echo Hello, world.
       - run:
-          name: Print the Current Time
-          command: date
+          name: test
+          command: echo $digital_ip
       - run:
           name: deploy
-          command: .circleci/deploy-ssh.sh
+          command: bash .circleci/deploy-ssh.sh
