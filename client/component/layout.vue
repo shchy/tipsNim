@@ -63,6 +63,7 @@ export default Vue.extend({
     /*border-right: 1px solid #333;*/
     width: 0px;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     order: -1;
     transition: width 100ms 0s ease;
     display: flex;
@@ -78,6 +79,7 @@ export default Vue.extend({
 #side-content {
     padding-left: 1rem;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .side-nav[isOpenMenu]{
