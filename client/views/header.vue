@@ -1,8 +1,7 @@
 <template>
     <div class="header-container">
         <ul>
-            <li>Head</li>
-            <li><router-link to="/">Top</router-link></li>
+            <li><router-link to="/"><i class="fas fa-home fa-2x"></i></br>Home</router-link></li>
             <li><router-link to="/login">Test</router-link></li>
         </ul>
     </div>
@@ -15,8 +14,10 @@ ul {
 }
 li {
     display: inline-block;
-
+    text-align: center;
+    margin: 0rem 0.5rem;
 }
+
 </style>
 
 <script lang="ts">

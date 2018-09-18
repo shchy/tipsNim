@@ -4,10 +4,6 @@
         <ul>
           <li><router-link to="/">Top</router-link></li>
           <li><router-link to="/login">Test</router-link></li>
-
-          <li v-for="i in 100">
-            {{i}}
-          </li>
         </ul>
     </div>
 </template>

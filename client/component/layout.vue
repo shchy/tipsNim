@@ -1,12 +1,11 @@
 <template>
-    <div id="layout">
-        <nav class="side-nav" v-bind:isOpenMenu="isOpenMenu">
-            <a id="side-close" href="#" @click="closeMenu">x</a>
+    <div id="layout" v-bind:isOpenMenu="isOpenMenu">
+        <nav class="side-nav">
             <router-view id="side-content" name="side"></router-view>    
-        </nav>    
-        <div class="content" v-bind:isOpenMenu="isOpenMenu">
+        </nav>
+        <div class="content">
             <header>
-                <a id="side-open" href="#" @click="openMenu">menu</a>
+                <a id="side-open" href="#" @click="toggleMenu"><i class="fas fa-bars fa-2x"></i></a>
                 <router-view id="header-content" name="header"></router-view>
             </header>
             <main class="main">
@@ -26,18 +25,15 @@ export default Vue.extend({
         }
     },
     methods:{
-        openMenu: function (){
-            this.isOpenMenu = true;
-        },
-        closeMenu: function (){
-            this.isOpenMenu = false;
+        toggleMenu: function (){
+            this.isOpenMenu = !this.isOpenMenu;
         }
     },
     watch:{
-    $route (to, from){
-        this.isOpenMenu = false;
-    }
-} 
+        $route (to, from){
+            this.isOpenMenu = false;
+        }
+    } 
 });
 
 </script>
@@ -48,6 +44,7 @@ export default Vue.extend({
     height: 100vh;
     display: flex;
     
+    
     /*background-image: url(https://www.webfx.com/blog/images/assets/cdn.sixrevisions.com/0431-01_responsive_background_image_demo/images/background-photo.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -55,58 +52,62 @@ export default Vue.extend({
     background-size: cover;
     background-color: #464646;*/
 }
+#layout[isOpenMenu] .side-nav{
+    width: 200px;
+    transition: width 300ms 0s ease;
+}
+#layout[isOpenMenu] .content{
+    transform: translateX(200px);
+    transition: transform 300ms 0s ease;
+}
 
 .side-nav{     
     position: absolute;
     height: 100vh;
     background: #fff;
-    /*border-right: 1px solid #333;*/
-    width: 0px;
+    
     overflow-y: scroll;
     order: -1;
-    transition: width 100ms 0s ease;
+    
+    width: 0px;
+    
     display: flex;
     flex-direction: column;
+    transition: width 200ms 0s ease;
+    
 }
 
 #side-close {
     align-self: flex-end;
-    padding-top: 0.5rem;
+    padding-top: 1rem;
     padding-right: 1rem;
-}
-
-#side-content {
-    padding-left: 1rem;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-}
-
-.side-nav[isOpenMenu]{
-    width: 200px;
-    transition: width 300ms 0s ease;
-}
-
-.content{
-    flex: 1;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.content[isOpenMenu]{
-    transform: translateX(200px);
-    transition: transform 300ms 0s ease;
-}
-
-
-header{
-    height: auto;
-    display: flex;
 }
 
 #side-open {
     width: auto;
     margin-right: 1rem;
+}
+
+#side-content {
+    padding: 1rem;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.content{
+    flex: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    
+    transition: transform 200ms 0s ease;
+}
+
+header{
+    height: auto;
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
 }
 
 #header-content {
@@ -121,9 +122,9 @@ header{
 
 @media screen and (min-width: 768px) {
 
+    /*
     .side-nav{
         position: relative;
-     
         width: 200px;
     }
     #side-close, #side-open{
@@ -131,6 +132,9 @@ header{
     }
     #side-content {
         padding-top: 1rem;
+    }*/
+    .content{
+        flex-direction: column;
     }
    
 }
