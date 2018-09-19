@@ -16,8 +16,9 @@ li {
   display: inline-block;
   text-align: center;
   margin-left: 0.5rem;
-  line-height: 0.5em;
+  line-height: 0.8em;
 }
+
 
 span::before {
   content: "\A";

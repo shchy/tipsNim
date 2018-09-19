@@ -1,6 +1,7 @@
 <template>
     <div id="layout" v-bind:isOpenMenu="isOpenMenu">
         <nav class="side-nav">
+            <a id="side-close" @click="toggleMenu"><i class="fas fa-times"></i></a>
             <router-view id="side-content" name="side"></router-view>    
         </nav>
         <div class="content">
@@ -42,21 +43,11 @@ export default Vue.extend({
 #layout {
   height: 100vh;
   display: flex;
-
-  /*background-image: url(https://www.webfx.com/blog/images/assets/cdn.sixrevisions.com/0431-01_responsive_background_image_demo/images/background-photo.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: #464646;*/
 }
+
 #layout[isOpenMenu] .side-nav {
   width: 200px;
   transition: width 300ms 0s ease;
-}
-#layout[isOpenMenu] .content {
-  transform: translateX(200px);
-  transition: transform 300ms 0s ease;
 }
 
 .side-nav {
@@ -87,7 +78,7 @@ export default Vue.extend({
 }
 
 #side-content {
-  padding: 1rem;
+  padding-left: 1rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
