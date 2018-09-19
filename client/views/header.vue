@@ -26,6 +26,9 @@ span::before {
 span {
   font-size: 0.5em;
 }
+i {
+  font-size: 1.5em;
+}
 </style>
 
 <script lang="ts">
