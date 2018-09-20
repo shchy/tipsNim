@@ -1,62 +1,30 @@
 <template>
     <div id="layout" v-bind:isOpenMenu="isOpenMenu">
         <nav class="side-nav">
-            <router-view id="side-content" name="side"></router-view>    
+            <a id="side-close" @click="toggleMenu"><i class="fas fa-times" /></a>
+            <router-view id="side-content" name="side" />    
         </nav>
         <div class="content">
             <header>
-                <a id="side-open" @click="toggleMenu"><i class="fas fa-bars"></i></a>
-                <router-view id="header-content" name="header"></router-view>
+                <a id="side-open" @click="toggleMenu"><i class="fas fa-bars" /></a>
+                <router-view id="header-content" name="header" />
             </header>
             <main class="main">
-                <router-view></router-view>
+                <router-view />
             </main>
         </div>
     </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-
-export default Vue.extend({
-  data() {
-    return {
-      isOpenMenu: false
-    };
-  },
-  methods: {
-    toggleMenu: function() {
-      this.isOpenMenu = !this.isOpenMenu;
-    }
-  },
-  watch: {
-    $route(to, from) {
-      this.isOpenMenu = false;
-    }
-  }
-});
-</script>
-
-
 <style scoped>
 #layout {
   height: 100vh;
   display: flex;
-
-  /*background-image: url(https://www.webfx.com/blog/images/assets/cdn.sixrevisions.com/0431-01_responsive_background_image_demo/images/background-photo.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: #464646;*/
 }
+
 #layout[isOpenMenu] .side-nav {
   width: 200px;
   transition: width 300ms 0s ease;
-}
-#layout[isOpenMenu] .content {
-  transform: translateX(200px);
-  transition: transform 300ms 0s ease;
 }
 
 .side-nav {
@@ -87,7 +55,7 @@ export default Vue.extend({
 }
 
 #side-content {
-  padding: 1rem;
+  padding-left: 1rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
@@ -104,8 +72,6 @@ header {
   height: auto;
   display: flex;
   padding: 1rem;
-  justify-content: center;
-  align-items: center;
 }
 
 #header-content {
@@ -135,3 +101,26 @@ header {
   }
 }
 </style>
+
+
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+  data() {
+    return {
+      isOpenMenu: false
+    };
+  },
+  methods: {
+    toggleMenu: function() {
+      this.isOpenMenu = !this.isOpenMenu;
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.isOpenMenu = false;
+    }
+  }
+});
+</script>
