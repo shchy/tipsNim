@@ -120,9 +120,9 @@ export default Vue.extend({
       isOpenMenu: false
     };
   },
-  created() {
+  mounted() {
     console.log(this.$el);
-    document.getElementById("#layout").scroll(200,0);
+    this.$el.getElementById("#layout").scroll(200,0);
 
   },
   methods: {
