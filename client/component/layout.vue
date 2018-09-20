@@ -1,16 +1,16 @@
 <template>
     <div id="layout" v-bind:isOpenMenu="isOpenMenu">
-        <nav class="side-nav">
-            <a id="side-close" @click="toggleMenu"><i class="fas fa-times" /></a>
+        <nav>
+            <a id="close-nav" @click="toggleMenu"><i class="fas fa-times" /></a>
             <router-view id="side-content" name="side" />    
         </nav>
         <div class="content">
             <header>
-                <a id="side-open" @click="toggleMenu"><i class="fas fa-bars" /></a>
+                <a id="open-nav" @click="toggleMenu"><i class="fas fa-bars" /></a>
                 <router-view id="header-content" name="header" />
             </header>
             <main class="main">
-                <router-view />
+                <router-view class="main-content" />
             </main>
         </div>
     </div>
@@ -22,18 +22,18 @@
   display: flex;
 }
 
-#layout[isOpenMenu] .side-nav {
+#layout[isOpenMenu] nav {
   width: 200px;
   transition: width 300ms 0s ease;
 }
 
-.side-nav {
+nav {
   position: absolute;
   height: 100vh;
   background: #fff;
 
   overflow-y: scroll;
-  order: -1;
+  order: 99;
 
   width: 0px;
 
@@ -42,19 +42,20 @@
   transition: width 200ms 0s ease;
 }
 
-#side-close {
+#close-nav {
   align-self: flex-end;
   padding-top: 1rem;
   padding-right: 1rem;
 }
 
-#side-open {
+#open-nav {
   width: auto;
   margin-right: 1rem;
   cursor: pointer;
 }
 
 #side-content {
+  height: 100%;
   padding-left: 1rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -76,6 +77,7 @@ header {
 
 #header-content {
   flex: 1;
+  height: 100%;
 }
 
 .main {
@@ -84,13 +86,17 @@ header {
   -webkit-overflow-scrolling: touch;
 }
 
+.main-content {
+  height: 100%;
+}
+
 @media screen and (min-width: 768px) {
   /*
-    .side-nav{
+    nav{
         position: relative;
         width: 200px;
     }
-    #side-close, #side-open{
+    #close-nav, #open-nav{
         display: none;
     }
     #side-content {
