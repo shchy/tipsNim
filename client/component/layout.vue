@@ -1,5 +1,6 @@
 <template>
-    <div id="layout" v-bind:isOpenMenu="isOpenMenu">
+ <!-- v-bind:isOpenMenu="isOpenMenu" -->
+    <div id="layout">
         <nav>
             <a id="close-nav" @click="toggleMenu"><i class="fas fa-times" /></a>
             <router-view id="side-content" name="side" />    
@@ -19,37 +20,40 @@
 <style scoped>
 #layout {
   height: 100vh;
+  width: 100vw;
+  overflow-x: scroll;
   display: flex;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
-#layout[isOpenMenu] nav {
-  width: 200px;
-  transition: width 300ms 0s ease;
+#layout nav {
+  min-width: 200px;
+  min-height: 100%;
+  scroll-snap-align: start;
+}
+
+#layout .content {
+  min-width: 100%;
+  min-height: 100%;
+  scroll-snap-align: start;
+  background: #fff;
 }
 
 nav {
-  position: absolute;
-  height: 100vh;
-  background: #fff;
-
-  overflow-y: scroll;
-  order: 99;
-
-  width: 0px;
-
   display: flex;
   flex-direction: column;
-  transition: width 200ms 0s ease;
+
+  overflow-y: scroll;
 }
 
 #close-nav {
-  align-self: flex-end;
   padding-top: 1rem;
   padding-right: 1rem;
+  align-self: flex-end;
 }
 
 #open-nav {
-  width: auto;
   margin-right: 1rem;
   cursor: pointer;
 }
@@ -65,8 +69,6 @@ nav {
   flex: 1;
   display: flex;
   flex-direction: column-reverse;
-
-  transition: transform 200ms 0s ease;
 }
 
 header {
@@ -109,7 +111,7 @@ header {
 </style>
 
 
-<script lang="ts">
+<script >
 import Vue from "vue";
 
 export default Vue.extend({
@@ -117,6 +119,11 @@ export default Vue.extend({
     return {
       isOpenMenu: false
     };
+  },
+  created() {
+    console.log(this.$el);
+    document.getElementById("#layout").scroll(200,0);
+
   },
   methods: {
     toggleMenu: function() {
@@ -129,4 +136,5 @@ export default Vue.extend({
     }
   }
 });
+
 </script>

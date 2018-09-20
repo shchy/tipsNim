@@ -39,7 +39,7 @@
 
 
 #carousel.snap > div {
-  scroll-snap-align: center;
+  scroll-snap-align: start;
 }
 
 #carousel > div {
