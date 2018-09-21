@@ -1,8 +1,6 @@
 <template>
- <!-- v-bind:isOpenMenu="isOpenMenu" -->
     <div id="layout" ref="layout">
         <nav>
-            <!-- <a id="close-nav" @click="toggleMenu"><i class="fas fa-times" /></a> -->
             <router-view id="side-content" name="side" />    
         </nav>
         <div class="content">
@@ -127,6 +125,9 @@ export default Vue.extend({
       var isOpenMenu = this.$refs["layout"].scrollLeft == 0;
       var scrollPos = isOpenMenu ? 200 : 0;
       this.scrollAtRef("layout", scrollPos, 0, "smooth");
+    },
+    closeMenu: function() {
+      this.scrollAtRef("layout", 200, 0, "smooth");
     },
     scrollAtRef: function(refName, x, y, behavior) {
       this.$refs[refName].scroll({
