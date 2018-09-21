@@ -1,16 +1,17 @@
 <template>
-    <div id="layout" v-bind:isOpenMenu="isOpenMenu">
-        <nav class="side-nav">
-            <a id="side-close" @click="toggleMenu"><i class="fas fa-times" /></a>
+ <!-- v-bind:isOpenMenu="isOpenMenu" -->
+    <div id="layout">
+        <nav>
+            <a id="close-nav" @click="toggleMenu"><i class="fas fa-times" /></a>
             <router-view id="side-content" name="side" />    
         </nav>
         <div class="content">
             <header>
-                <a id="side-open" @click="toggleMenu"><i class="fas fa-bars" /></a>
+                <a id="open-nav" @click="toggleMenu"><i class="fas fa-bars" /></a>
                 <router-view id="header-content" name="header" />
             </header>
             <main class="main">
-                <router-view />
+                <router-view class="main-content" />
             </main>
         </div>
     </div>
@@ -19,42 +20,46 @@
 <style scoped>
 #layout {
   height: 100vh;
+  width: 100vw;
+  overflow-x: scroll;
   display: flex;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
-#layout[isOpenMenu] .side-nav {
-  width: 200px;
-  transition: width 300ms 0s ease;
+#layout nav {
+  min-width: 200px;
+  min-height: 100%;
+  scroll-snap-align: start;
 }
 
-.side-nav {
-  position: absolute;
-  height: 100vh;
+#layout .content {
+  min-width: 100%;
+  min-height: 100%;
+  scroll-snap-align: start;
   background: #fff;
+}
 
-  overflow-y: scroll;
-  order: -1;
-
-  width: 0px;
-
+nav {
   display: flex;
   flex-direction: column;
-  transition: width 200ms 0s ease;
+
+  overflow-y: scroll;
 }
 
-#side-close {
-  align-self: flex-end;
+#close-nav {
   padding-top: 1rem;
   padding-right: 1rem;
+  align-self: flex-end;
 }
 
-#side-open {
-  width: auto;
+#open-nav {
   margin-right: 1rem;
   cursor: pointer;
 }
 
 #side-content {
+  height: 100%;
   padding-left: 1rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -64,8 +69,6 @@
   flex: 1;
   display: flex;
   flex-direction: column-reverse;
-
-  transition: transform 200ms 0s ease;
 }
 
 header {
@@ -76,6 +79,7 @@ header {
 
 #header-content {
   flex: 1;
+  height: 100%;
 }
 
 .main {
@@ -84,13 +88,17 @@ header {
   -webkit-overflow-scrolling: touch;
 }
 
+.main-content {
+  height: 100%;
+}
+
 @media screen and (min-width: 768px) {
   /*
-    .side-nav{
+    nav{
         position: relative;
         width: 200px;
     }
-    #side-close, #side-open{
+    #close-nav, #open-nav{
         display: none;
     }
     #side-content {
@@ -103,7 +111,7 @@ header {
 </style>
 
 
-<script lang="ts">
+<script >
 import Vue from "vue";
 
 export default Vue.extend({
@@ -111,6 +119,12 @@ export default Vue.extend({
     return {
       isOpenMenu: false
     };
+  },
+  mounted() {
+    //console.log(this.$el);
+    window.scrollTo(200,0);
+    //this.$el.getElementById("#layout").scroll(200,0);
+
   },
   methods: {
     toggleMenu: function() {
@@ -123,4 +137,5 @@ export default Vue.extend({
     }
   }
 });
+
 </script>
