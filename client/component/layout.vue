@@ -1,8 +1,8 @@
 <template>
  <!-- v-bind:isOpenMenu="isOpenMenu" -->
-    <div id="layout">
+    <div id="layout" ref="layout">
         <nav>
-            <a id="close-nav" @click="toggleMenu"><i class="fas fa-times" /></a>
+            <!-- <a id="close-nav" @click="toggleMenu"><i class="fas fa-times" /></a> -->
             <router-view id="side-content" name="side" />    
         </nav>
         <div class="content">
@@ -19,12 +19,13 @@
 
 <style scoped>
 #layout {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   overflow-x: scroll;
   display: flex;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 #layout nav {
@@ -116,26 +117,29 @@ import Vue from "vue";
 
 export default Vue.extend({
   data() {
-    return {
-      isOpenMenu: false
-    };
+    return {};
   },
   mounted() {
-    //console.log(this.$el);
-    window.scrollTo(200,0);
-    //this.$el.getElementById("#layout").scroll(200,0);
-
+    this.scrollAtRef("layout", 200, 0, "instant");
   },
   methods: {
     toggleMenu: function() {
-      this.isOpenMenu = !this.isOpenMenu;
+      var isOpenMenu = this.$refs["layout"].scrollLeft == 0;
+      var scrollPos = isOpenMenu ? 200 : 0;
+      this.scrollAtRef("layout", scrollPos, 0, "smooth");
+    },
+    scrollAtRef: function(refName, x, y, behavior) {
+      this.$refs[refName].scroll({
+        top: y,
+        left: x,
+        behavior: behavior
+      });
     }
   },
   watch: {
     $route(to, from) {
-      this.isOpenMenu = false;
+      this.closeMenu();
     }
   }
 });
-
 </script>
