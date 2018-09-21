@@ -121,8 +121,9 @@ export default Vue.extend({
     };
   },
   mounted() {
-    console.log(this.$el);
-    this.$el.getElementById("#layout").scroll(200,0);
+    //console.log(this.$el);
+    window.scrollTo(200,0);
+    //this.$el.getElementById("#layout").scroll(200,0);
 
   },
   methods: {
