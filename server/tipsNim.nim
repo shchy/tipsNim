@@ -3,11 +3,15 @@ import
     alpaka/auth/sessionauth,
     module/signin
 
+var cacheSeconds = 0
+when declared(release):
+    cacheSeconds = 60 * 60 * 24 * 30
+
 
 let handler = choose(
     # subRoute("/",           signin.handlers),
     # subRoute("/home/",      mustBeAuth >=> choose(home.handlers)),
-    serveDir("/", "./assets/dist/", 0),
+    serveDir("/", "./assets/dist/", cacheSeconds),
     NOTFOUND >=> view "./assets/index.html",
 )
 

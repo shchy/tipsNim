@@ -25,3 +25,6 @@ task exec, "exec":
     exec "npm run build"
     exec "./server/tipsNim"
 
+task debug, "debug":
+    exec "npm run build"
+    exec "nim c -r ./server/tipsNim"
