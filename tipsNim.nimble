@@ -19,7 +19,7 @@ task clean, "clean":
     exec "rm -rf ./server/nimcache"
     
 task exec, "exec":
-    exec "nimble build"
+    exec "nim c -d:release ./server/tipsNim"
 #    exec "cp -a ./src/assets/ ./bin/assets/"
 #    exec "cp -a ./src/views/ ./bin/views/"
     exec "npm run build"

@@ -4,9 +4,8 @@ import
     module/signin
 
 var cacheSeconds = 0
-when declared(release):
+when defined(release):
     cacheSeconds = 60 * 60 * 24 * 30
-
 
 let handler = choose(
     # subRoute("/",           signin.handlers),
