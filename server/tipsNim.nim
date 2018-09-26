@@ -14,5 +14,5 @@ let handler = choose(
 handler
     .newRouter()
     .useSessionAuth(getUser, "/", "authCookie", "hash", 60 * 30)
-    .useAsyncHttpServer(8080)
+    .useHttpServer(8080)
     .run()
