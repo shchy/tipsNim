@@ -1,8 +1,4 @@
 import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
-export default {
-    resolve: function(){
-        smoothscroll.polyfill();
-    }
-}
 
