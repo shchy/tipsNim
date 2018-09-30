@@ -27,4 +27,4 @@ task exec, "exec":
 
 task debug, "debug":
     exec "npm run build"
-    exec "nim c -r ./server/tipsNim"
+    exec "nim c -r ./server/tipsNim 8080"
