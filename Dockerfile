@@ -7,6 +7,8 @@ RUN cd alpaka && nimble develop -y && cd ../
 RUN git clone https://github.com/shchy/tipsNim.git
 RUN cd tipsNim && npm i -y && nimble build -y
 
-EXPOSE 8080
+EXPOSE 80
 
-CMD cd tipsNim && git pull && nimble exec
+CMD cd tipsNim \
+    && git pull \
+    && nimble exec
