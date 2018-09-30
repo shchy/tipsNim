@@ -1,6 +1,6 @@
 <template>
     <div id="layout" ref="layout">
-        <nav>
+        <nav ref="navi">
             <router-view id="side-content" name="side" />    
         </nav>
         <div class="content">
@@ -92,17 +92,6 @@ header {
 }
 
 @media screen and (min-width: 768px) {
-  /*
-    nav{
-        position: relative;
-        width: 200px;
-    }
-    #close-nav, #open-nav{
-        display: none;
-    }
-    #side-content {
-        padding-top: 1rem;
-    }*/
   .content {
     flex-direction: column;
   }
@@ -115,19 +104,22 @@ import Vue from "vue";
 
 export default Vue.extend({
   data() {
-    return {};
+    return {
+      sideWidth: 0
+    };
   },
   mounted() {
-    this.scrollAtRef("layout", 200, 0, "instant");
+    this.sideWidth = this.$refs["navi"].scrollWidth;
+    this.scrollAtRef("layout", this.sideWidth, 0, "instant");
   },
   methods: {
     toggleMenu: function() {
       var isOpenMenu = this.$refs["layout"].scrollLeft == 0;
-      var scrollPos = isOpenMenu ? 200 : 0;
+      var scrollPos = isOpenMenu ? this.sideWidth : 0;
       this.scrollAtRef("layout", scrollPos, 0, "smooth");
     },
     closeMenu: function() {
-      this.scrollAtRef("layout", 200, 0, "smooth");
+      this.scrollAtRef("layout", this.sideWidth, 0, "smooth");
     },
     scrollAtRef: function(refName, x, y, behavior) {
       this.$refs[refName].scroll({
