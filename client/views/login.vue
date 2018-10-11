@@ -49,7 +49,6 @@ form input {
 import { Component, Prop, Emit, Watch, Vue } from 'vue-property-decorator';
 import { DefineGetters, DefineMutations, DefineActions, Dispatcher, Committer } from 'vuex-type-helper'
 import { AuthActions } from '../store/modules/auth/if';
-// import {UserActions} from '../store/modules/user/if';
 
 
 @Component({
@@ -67,7 +66,6 @@ export default class Login extends Vue {
         this.$router.push('/login');
       });
   }
-
   login(): void {   
     this.$store.dispatch<Dispatcher<AuthActions>>({
       type: 'AUTH_REQUEST', 
