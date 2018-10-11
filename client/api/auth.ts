@@ -15,8 +15,8 @@ function getToken(user: { id: string, password: string }) {
         });
 }
 
-function getMe() {
-    return fetch("/api/v1/auth/token", { method: "POST" })
+function getMe(id: string) {
+    return fetch("/api/v1/auth/me", { method: "GET" })
         .then(resp => {
             if (!resp.ok) {
                 return Promise.reject(resp);

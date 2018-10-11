@@ -1,7 +1,3 @@
-
-// import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from '../actions/auth'
-// import { USER_REQUEST } from '../actions/user'
-import * as Vuex from 'vuex';
 import { DefineGetters, DefineMutations, DefineActions, Dispatcher, Committer } from 'vuex-type-helper'
 import authApi from "../../../api/auth";
 import { AuthState, AuthGetters, AuthMutations, AuthActions } from "./if"
@@ -37,20 +33,20 @@ const mutations: DefineMutations<AuthMutations, AuthState> = {
     }
 }
 
-const actions: DefineActions<AuthActions, AuthState, AuthMutations, AuthGetters> = {
+const actions: DefineActions<AuthActions, AuthState, AuthMutations, AuthGetters, UserActions> = {
     AUTH_REQUEST: ({ commit, dispatch }, user) => {
         return new Promise((resolve, reject) => {
-            commit('AUTH_REQUEST', null)
+            commit('AUTH_REQUEST', {})
             authApi.getToken(user)
                 // apiCall({ url: 'auth', data: user, method: 'POST' })
                 .then(resp => {
-                    localStorage.setItem('user-token', resp.token)
+                    localStorage.setItem('user-token', resp.token);
                     // Here set the header of your ajax library to the token value.
                     // example with axios
                     // axios.defaults.headers.common['Authorization'] = resp.token
-                    commit('AUTH_SUCCESS', resp)
-                    dispatch<Dispatcher<UserActions>>({ type: 'USER_REQUEST' }) // todo how to get other module dispacher
-                    resolve(resp)
+                    commit('AUTH_SUCCESS', resp);
+                    dispatch('USER_REQUEST', {});
+                    resolve(resp);
                 })
                 .catch(err => {
                     commit('AUTH_ERROR', err)
@@ -59,9 +55,9 @@ const actions: DefineActions<AuthActions, AuthState, AuthMutations, AuthGetters>
                 })
         })
     },
-    AUTH_LOGOUT: ({ commit, dispatch }) => {
+    AUTH_LOGOUT: ({ commit }) => {
         return new Promise((resolve, reject) => {
-            commit('AUTH_LOGOUT', null)
+            commit('AUTH_LOGOUT', {})
             localStorage.removeItem('user-token')
             resolve()
         })

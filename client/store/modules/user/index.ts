@@ -32,17 +32,17 @@ const mutations: DefineMutations<UserMutations, UserState> = {
     }
 }
 
-const actions: DefineActions<UserActions, UserState, UserMutations, UserGetters> = {
-    USER_REQUEST: ({ commit, dispatch }) => {
-        commit('USER_REQUEST', null)
-        authApi.getMe()
+const actions: DefineActions<UserActions, UserState, UserMutations, UserGetters, AuthActions> = {
+    USER_REQUEST: ({ commit, dispatch, getters }) => {
+        commit('USER_REQUEST', {})
+        authApi.getMe(getters.getProfile.name)
             .then(resp => {
                 commit('USER_SUCCESS', resp)
             })
             .catch(resp => {
-                commit('USER_ERROR', null)
+                commit('USER_ERROR', {})
                 // if resp is unauthorized, logout, to
-                dispatch('AUTH_LOGOUT', null)
+                dispatch('AUTH_LOGOUT', {})
             })
     },
 }

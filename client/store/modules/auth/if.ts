@@ -8,13 +8,15 @@ export interface AuthGetters {
     isAuthenticated: boolean,
     authStatus: string,
 }
+
 export interface AuthMutations {
-    AUTH_REQUEST: null,
+    AUTH_REQUEST: {},
     AUTH_SUCCESS: { token: string },
-    AUTH_ERROR: null,
-    AUTH_LOGOUT: null
+    AUTH_ERROR: {},
+    AUTH_LOGOUT: {}
 }
+
 export interface AuthActions {
+    AUTH_LOGOUT: {},
     AUTH_REQUEST: { id: string, password: string },
-    AUTH_LOGOUT: null,
 }

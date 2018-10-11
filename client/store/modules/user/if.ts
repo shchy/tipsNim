@@ -7,11 +7,11 @@ export interface UserGetters {
     isProfileLoaded: boolean,
 }
 export interface UserMutations {
-    USER_REQUEST: null,
-    USER_SUCCESS: { resp: { name: string } },
-    USER_ERROR: null,
-    AUTH_LOGOUT: null,
+    USER_REQUEST: {},
+    USER_SUCCESS: { name: string },
+    USER_ERROR: {},
+    AUTH_LOGOUT: {},
 }
 export interface UserActions {
-    USER_REQUEST: null,
+    USER_REQUEST: {},
 }

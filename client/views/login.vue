@@ -45,26 +45,71 @@ form input {
 }
 </style>
 
-<script>
-import Vue from "vue";
-import authApi from "@/api/auth";
+<script lang='ts'>
+import { Component, Prop, Emit, Watch, Vue } from 'vue-property-decorator';
+import { DefineGetters, DefineMutations, DefineActions, Dispatcher, Committer } from 'vuex-type-helper'
+import { AuthActions } from '../store/modules/auth/if';
+// import {UserActions} from '../store/modules/user/if';
 
-export default {
-  name: "Login",
-  data() {
-    return {
-      username: "",
-      password: ""
-    };
-  },
-  methods: {
-    login: function() {
-      const { username, password } = this;
 
-      authApi.getToken(username, password).then(data => {
-        alert(data);
+@Component({
+})
+export default class Login extends Vue {
+
+  // data
+  username: string = "";
+  password: string = "";
+
+  // methods
+  logout(): void {
+    this.$store.dispatch<Dispatcher<AuthActions>>({type:'AUTH_LOGOUT'})
+      .then(()=>{
+        this.$router.push('/login');
       });
-    }
   }
+
+  login(): void {   
+    this.$store.dispatch<Dispatcher<AuthActions>>({
+      type: 'AUTH_REQUEST', 
+      id: this.username, 
+      password: this.password
+    })
+    .then(() => {
+      this.$router.push('/');
+    });
+  }
+  
+  
+
+
+  // name: "Login",
+  // data() {
+  //   return {
+  //     username: "",
+  //     password: ""
+  //   };
+  // },
+  // methods: {
+  //   login: function() {
+      
+  //     this.$store.dispatch<Dispatcher<AuthActions>>({
+  //       type: 'AUTH_REQUEST', 
+  //       id: this.username, 
+  //       password: this.password
+  //     })
+  //     .then(() => {
+  //       this.$router.push('/');
+  //     });
+  //   },
+  //   logout: function() {
+
+  //     this.$store.dispatch<Dispatcher<UserActions & AuthActions>>({
+  //       type: 'AUTH_LOGOUT',
+  //     })
+  //     .then(()=>{
+  //       this.$router.push('/login');
+  //     });
+  //   }
+  // }
 };
 </script>

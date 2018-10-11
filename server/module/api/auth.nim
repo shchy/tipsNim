@@ -22,6 +22,7 @@ let handlers* = [
     #     POST >=> signin,
     # )
 
-    POST >=> route("/token") >=> text "test"
+    POST >=> route("/token") >=> text "{\"token\" :\"testToken\"}",
+    GET >=> route("/me") >=> text "{\"name\" :\"test\"}"
 ]
 
