@@ -1,8 +1,11 @@
 import 
     alpaka,
     alpaka/auth/sessionauth,
-    module/signin,
-    os, strutils
+    module/api/auth,
+    service/datacontext,
+    service/models,
+    os, strutils,
+    sequtils
 
 var cacheSeconds = 0
 when defined(release):
@@ -10,11 +13,22 @@ when defined(release):
 
 let handler = choose(
     # subRoute("/",           signin.handlers),
-    # subRoute("/home/",      mustBeAuth >=> choose(home.handlers)),
+    subRoute("/api/v1/auth/",  auth.handlers),  
     serveDir("/", "./assets/dist/", cacheSeconds),
     NOTFOUND >=> view "./assets/index.html",
 )
 
+
+
+proc getUser*(id,pass: string): AuthedUser =
+    let users = getUsers().filter do (u:User) -> bool: u.id == id and u.password == pass
+    if users.len() <= 0:
+        return nil
+    return AuthedUser(
+        id: users[0].id,
+        name: users[0].name,
+        role: @[],
+    )
 
 var port = 80
 if paramCount() >= 1:

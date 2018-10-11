@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import router from './router';
-import layout from '@/component/layout.vue'
+import layout from '@/component/layout.vue';
 import '@/polyfill';
 import '@/css'
 
