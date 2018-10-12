@@ -1,11 +1,48 @@
 <template>
     <div class="login-container">
-        <h1>Hello Vue.js!</h1>
-        <button @click="onLogin">getToken test</button>
+        <form @submit.prevent="login" >
+          <h1>Sign in</h1>
+
+          <label>User Name</label>
+          <input required v-model="username" type="text" />
+
+          <label>Password</label>
+          <input required v-model="password" type="password" />
+
+          <div class="on-right">
+            <button type="submit">Sign in</button>
+          </div>
+        </form>
     </div>
 </template>
 
 <style>
+.login-container {
+  position: relative;
+}
+
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  width: 200px;
+}
+
+form {
+  border: solid #eee 1px;
+}
+
+form label,
+form input {
+  display: block;
+  margin: 0.5rem 0.5rem;
+  width: calc(200px - 1.5rem);
+}
+
+.on-right {
+  text-align: right;
+}
 </style>
 
 <script>
@@ -15,11 +52,18 @@ import getToken from "@/api/auth";
 export default {
   name: "Login",
   data() {
-    return {};
+    return {
+      username: "",
+      password: ""
+    };
   },
   methods: {
-    onLogin() {
-      getToken("test", "test").then(data => alert(data));
+    login: function() {
+      const { username, password } = this;
+
+      getToken(username, password).then(data => {
+        alert(data);
+      });
     }
   }
 };

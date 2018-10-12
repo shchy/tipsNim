@@ -9,18 +9,18 @@ export default new Router({
         {
             path: '/',
             components: {
-                default: () => import('@/views/debug.vue'),
-                side: () => import('@/views/side.vue'),
-                header: () => import('@/views/header.vue'),
+                default: () => import('@/views/login.vue'),
+                // side: () => import('@/views/side.vue'),
+                // header: () => import('@/views/header.vue'),
             }
         },
         {
             path: '/login',
-            components:{
+            components: {
                 default: () => import('@/views/login.vue'),
                 side: () => import('@/views/side.vue'),
                 header: () => import('@/views/header.vue'),
-            } 
+            }
         },
         {
             path: '*',
