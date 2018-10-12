@@ -8,9 +8,9 @@
 <style>
 </style>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
-import getToken from "../api/auth";
+import getToken from "@/api/auth";
 
 export default {
   name: "Login",
@@ -19,9 +19,7 @@ export default {
   },
   methods: {
     onLogin() {
-      console.log("hello");
-      var result = getToken("", "");
-      alert(result);
+      getToken("test", "test").then(data => alert(data));
     }
   }
 };
