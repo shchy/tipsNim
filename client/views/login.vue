@@ -47,7 +47,7 @@ form input {
 
 <script>
 import Vue from "vue";
-import getToken from "@/api/auth";
+import authApi from "@/api/auth";
 
 export default {
   name: "Login",
@@ -61,7 +61,7 @@ export default {
     login: function() {
       const { username, password } = this;
 
-      getToken(username, password).then(data => {
+      authApi.getToken(username, password).then(data => {
         alert(data);
       });
     }
