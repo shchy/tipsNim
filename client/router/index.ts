@@ -1,15 +1,24 @@
 import Vue from 'vue'
-import Router, {NavigationGuard} from 'vue-router'
+import Router, { NavigationGuard } from 'vue-router'
 import store from '../store'
 
 Vue.use(Router)
 
-const isAuthed: NavigationGuard = (to, from, next) =>{
-    if(store.getters.isAuthenticated){
+
+const isAuthed: NavigationGuard = (to, from, next) => {
+    if (store.getters.isAuthenticated) {
         next();
         return;
     }
-    next(false);
+    next("/login");
+};
+
+const isNotAuthed: NavigationGuard = (to, from, next) => {
+    if (!store.getters.isAuthenticated) {
+        next();
+        return;
+    }
+    next("/");
 };
 
 export default new Router({
@@ -25,12 +34,13 @@ export default new Router({
             beforeEnter: isAuthed,
         },
         {
-            path: '/',
+            path: '/login',
             components: {
                 default: () => import('@/views/login.vue'),
                 // side: () => import('@/views/side.vue'),
                 // header: () => import('@/views/header.vue'),
             },
+            beforeEnter: isNotAuthed,
         },
         {
             path: '*',
