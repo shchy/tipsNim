@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .login-container {
   position: relative;
 }
@@ -46,39 +46,41 @@ form input {
 </style>
 
 <script lang='ts'>
-import { Component, Prop, Emit, Watch, Vue } from 'vue-property-decorator';
-import { DefineGetters, DefineMutations, DefineActions, Dispatcher, Committer } from 'vuex-type-helper'
-import { AuthActions } from '../store/modules/auth/if';
+import { Component, Prop, Emit, Watch, Vue } from "vue-property-decorator";
+import {
+  DefineGetters,
+  DefineMutations,
+  DefineActions,
+  Dispatcher,
+  Committer
+} from "vuex-type-helper";
+import { AuthActions } from "../store/modules/auth/if";
 
-
-@Component({
-})
+@Component({})
 export default class Login extends Vue {
-
   // data
   username: string = "";
   password: string = "";
 
   // methods
   logout(): void {
-    this.$store.dispatch<Dispatcher<AuthActions>>({type:'AUTH_LOGOUT'})
-      .then(()=>{
-        this.$router.push('/login');
+    this.$store
+      .dispatch<Dispatcher<AuthActions>>({ type: "AUTH_LOGOUT" })
+      .then(() => {
+        this.$router.push("/login");
       });
   }
-  login(): void {   
-    this.$store.dispatch<Dispatcher<AuthActions>>({
-      type: 'AUTH_REQUEST', 
-      id: this.username, 
-      password: this.password
-    })
-    .then(() => {
-      this.$router.push('/');
-    });
+  login(): void {
+    this.$store
+      .dispatch<Dispatcher<AuthActions>>({
+        type: "AUTH_REQUEST",
+        id: this.username,
+        password: this.password
+      })
+      .then(() => {
+        this.$router.push("/");
+      });
   }
-  
-  
-
 
   // name: "Login",
   // data() {
@@ -89,10 +91,10 @@ export default class Login extends Vue {
   // },
   // methods: {
   //   login: function() {
-      
+
   //     this.$store.dispatch<Dispatcher<AuthActions>>({
-  //       type: 'AUTH_REQUEST', 
-  //       id: this.username, 
+  //       type: 'AUTH_REQUEST',
+  //       id: this.username,
   //       password: this.password
   //     })
   //     .then(() => {
@@ -109,5 +111,5 @@ export default class Login extends Vue {
   //     });
   //   }
   // }
-};
+}
 </script>
