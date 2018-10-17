@@ -46,12 +46,6 @@ nav {
   overflow-y: scroll;
 }
 
-#close-nav {
-  padding-top: 1rem;
-  padding-right: 1rem;
-  align-self: flex-end;
-}
-
 #open-nav {
   margin-right: 1rem;
   cursor: pointer;
@@ -59,7 +53,6 @@ nav {
 
 #side-content {
   height: 100%;
-  padding-left: 1rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }

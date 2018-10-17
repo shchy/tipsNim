@@ -1,4 +1,4 @@
-module giraffeTest.App
+module Tips.App
 
 open System
 open System.IO
@@ -8,16 +8,16 @@ open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
+open Tips.Router
 
-
-let webApp =
-    choose [
-        subRoute "/api/v1/auth" (choose[
-            POST  >=> route "/token" >=> text "{\"token\" :\"testToken\"}"
-            GET   >=> route "/me" >=> text "{\"name\" :\"test\"}"
-        ])
-        GET >=> htmlFile "./assets/index.html" 
-        ]
+// let webApp =
+//     choose [
+//         subRoute "/api/v1/auth" (choose[
+//             POST  >=> route "/token" >=> text "{\"token\" :\"testToken\"}"
+//             GET   >=> route "/me" >=> text "{\"name\" :\"test\"}"
+//         ])
+//         GET >=> htmlFile "./assets/index.html" 
+//     ]
 
 // ---------------------------------
 // Error handler
@@ -45,7 +45,7 @@ let configureApp (app : IApplicationBuilder) =
         // .UseHttpsRedirection()
         .UseCors(configureCors)
         .UseStaticFiles()
-        .UseGiraffe(webApp)
+        .UseGiraffe(Root.webApp)
 
 let configureServices (services : IServiceCollection) =
     services.AddCors()    |> ignore
