@@ -32,7 +32,7 @@ let errorHandler (ex : Exception) (logger : ILogger) =
 // ---------------------------------
 
 let configureCors (builder : CorsPolicyBuilder) =
-    builder.WithOrigins("http://localhost:8080")
+    builder.WithOrigins("http://localhost:8089")
            .AllowAnyMethod()
            .AllowAnyHeader()
            |> ignore
@@ -67,6 +67,8 @@ let main _ =
         .Configure(Action<IApplicationBuilder> configureApp)
         .ConfigureServices(configureServices)
         .ConfigureLogging(configureLogging)
+        .UseUrls("http://*:8080/;https://*:8000/")
+        .UseSetting("https_port", "8000")
         .Build()
         .Run()
     0

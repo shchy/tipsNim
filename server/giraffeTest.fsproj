@@ -7,14 +7,15 @@
     <OutputType>Exe</OutputType>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <!-- aspnet/BuildTools#662 Don't police what version of NetCoreApp we use -->
-    <NETCoreAppMaximumVersion>99.9</NETCoreAppMaximumVersion>
-    <RuntimeFrameworkVersion>3.0.0-preview1-27009-01</RuntimeFrameworkVersion>
+    <!-- <NETCoreAppMaximumVersion>99.9</NETCoreAppMaximumVersion>
+    <RuntimeFrameworkVersion>3.0.0-preview1-27009-01</RuntimeFrameworkVersion> -->
   </PropertyGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="3.0.0-alpha1-10062" />
-    <PackageReference Include="Giraffe" Version="2.0.*" />
+    <PackageReference Include="Giraffe" Version="3.2.*" />
+    <PackageReference Include="TaskBuilder.fs" Version="2.1.*" />
   </ItemGroup>
 
   <ItemGroup>
