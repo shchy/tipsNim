@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>giraffeTest</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <!-- aspnet/BuildTools#662 Don't police what version of NetCoreApp we use -->
+    <NETCoreAppMaximumVersion>99.9</NETCoreAppMaximumVersion>
+    <RuntimeFrameworkVersion>3.0.0-preview1-27009-01</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="3.0.0-alpha1-10062" />
+    <PackageReference Include="Giraffe" Version="2.0.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="web.config" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="assets\dist\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+
+</Project>
