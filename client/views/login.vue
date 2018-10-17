@@ -30,7 +30,7 @@ form {
 }
 
 form {
-  border: solid #eee 1px;
+  border: solid #eee 0px;
 }
 
 form label,
