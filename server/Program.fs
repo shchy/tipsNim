@@ -2,24 +2,32 @@ module Tips.App
 
 open System
 open System.IO
-open Microsoft.AspNetCore.Authentication.JwtBearer;
+open System.Text
+open Microsoft.AspNetCore.Authentication.JwtBearer
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.AspNetCore.Hosting
+open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
+open Microsoft.IdentityModel.Tokens
 open Giraffe
 open Tips.Router
 
+let mutable Configuration: IConfiguration = null
 
-let jwtOptions ( options :JwtBearerOptions) = 
-    do
-        options.TokenValidationParameters <- new TokenValidationParameters()
-        
-    ignore
-
-
-
+let jwtOptions (options :JwtBearerOptions) = 
+    options.TokenValidationParameters <- new TokenValidationParameters(
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = Configuration.["Jwt:Issuer"],
+        ValidAudience = Configuration.["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.["Jwt:Key"]))
+    )
+    
+    
 // ---------------------------------
 // Error handler
 // ---------------------------------
@@ -46,13 +54,14 @@ let configureApp (app : IApplicationBuilder) =
         // .UseHttpsRedirection()
         .UseCors(configureCors)
         .UseStaticFiles()
+        .UseAuthentication()
         .UseGiraffe(Root.webApp)
 
-let configureServices (services : IServiceCollection) =
+let configureServices (services : IServiceCollection) =                                                
     services.AddCors()    |> ignore
     services.AddGiraffe() |> ignore
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(jwtOptions) |> ignore
+        .AddJwtBearer(Action<JwtBearerOptions>(jwtOptions)) |> ignore
 
 let configureLogging (builder : ILoggingBuilder) =
     let filter (l : LogLevel) = l.Equals LogLevel.Error
@@ -62,6 +71,13 @@ let configureLogging (builder : ILoggingBuilder) =
 let main _ =
     let contentRoot = Directory.GetCurrentDirectory()
     let webRoot     = Path.Combine(contentRoot, "assets/dist")
+    let builder = 
+        new ConfigurationBuilder()
+    builder.SetBasePath(contentRoot) |> ignore
+    builder.AddJsonFile("appsettings.json", optional= false, reloadOnChange= true) |> ignore
+    builder.AddEnvironmentVariables() |> ignore
+    Configuration <- builder.Build() 
+    
     WebHostBuilder()
         .UseKestrel()
         .UseContentRoot(contentRoot)
