@@ -1,7 +1,6 @@
 echo "stop docker container" \
 && docker ps -a -q | xargs docker stop \
-&& docker ps -a -q | xargs docker rm \
-&& docker image -q | xargs docker image rm \
+&& docker rm -v \
 && echo clean \
 && rm -rf tipsNim/ \
 && echo build \
