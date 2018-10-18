@@ -29,10 +29,6 @@ form {
   width: 200px;
 }
 
-form {
-  border: solid #eee 0px;
-}
-
 form label,
 form input {
   display: block;
