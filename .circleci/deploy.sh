@@ -1,6 +1,7 @@
 echo "stop docker container" \
-&& docker ps -a -q | xargs docker stop \
-&& docker rm -v \
+&& for container in $(docker ps -a -q); do (docker stop $container); done \
+&& for container in $(docker ps -a -q); do (docker rm $container); done \
+&& for container in $(docker image -q); do (docker image rm $container); done \
 && echo clean \
 && rm -rf tipsNim/ \
 && echo build \
@@ -8,3 +9,6 @@ echo "stop docker container" \
 && cd tipsNim \
 && docker build -t tips . \
 && docker run -p 80:8000 -d tips
+
+
+for container in $(docker ps -a -q); do (docker stop $container); done
