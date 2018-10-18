@@ -67,8 +67,8 @@ let main _ =
         .Configure(Action<IApplicationBuilder> configureApp)
         .ConfigureServices(configureServices)
         .ConfigureLogging(configureLogging)
-        .UseUrls("http://*:8080/;https://*:8000/")
-        .UseSetting("https_port", "8000")
+        .UseUrls("http://*:8080/;https://*:443/")
+        .UseSetting("https_port", "443")
         .Build()
         .Run()
     0
