@@ -14,10 +14,6 @@ RUN apt install git -y
 RUN apt install libunwind8 icu-devtools -y
 RUN git clone https://github.com/shchy/tipsNim.git
 
-EXPOSE 8000
+EXPOSE 443 8000
 
-CMD cd tipsNim \
-    && npm i -y \
-    && git pull \
-    && sh .scripts/build.sh \
-    && sh .scripts/run.sh 
+ENTRYPOINT [ "/bin/bash" ]
