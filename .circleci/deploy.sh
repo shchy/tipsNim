@@ -9,6 +9,3 @@ echo "stop docker container" \
 && cd tipsNim \
 && docker build -t tips . \
 && docker run -p 80:8000 -d tips
-
-
-for container in $(docker ps -a -q); do (docker stop $container); done
