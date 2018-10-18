@@ -17,5 +17,6 @@ RUN git clone https://github.com/shchy/tipsNim.git
 EXPOSE 443 8000
 
 COPY .circleci/docker_run.sh /
+RUN ["chmod", "+x", "/docker_run.sh"]
 
 ENTRYPOINT [ "/docker_run.sh" ]
