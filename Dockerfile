@@ -14,7 +14,7 @@ RUN apt install git -y
 RUN apt install libunwind8 icu-devtools -y
 RUN git clone https://github.com/shchy/tipsNim.git
 
-EXPOSE 443 8080
+EXPOSE 8080 8081
 
 COPY .circleci/docker_run.sh /
 RUN ["chmod", "+x", "/docker_run.sh"]
