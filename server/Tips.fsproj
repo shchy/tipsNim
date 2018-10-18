@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <DebugType>portable</DebugType>
-    <AssemblyName>giraffeTest</AssemblyName>
+    <AssemblyName>Tips</AssemblyName>
     <OutputType>Exe</OutputType>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <!-- aspnet/BuildTools#662 Don't police what version of NetCoreApp we use -->
@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="*\*.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
