@@ -7,5 +7,5 @@ echo "stop docker container" \
 && echo build \
 && git clone https://github.com/shchy/tipsNim.git \
 && cd tipsNim \
-&& docker build --no-cache=true -t tips . \
+&& docker build -t tips . \
 && docker run -p 80:8000 -d tips
