@@ -11,7 +11,7 @@ RUN apt install gnupg gnupg2 gnupg1 -y
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt install nodejs -y
 RUN apt install git -y
-RUN apt install libunwind8 icu-devtools
+RUN apt install libunwind8 icu-devtools -y
 RUN git clone https://github.com/shchy/tipsNim.git
 
 EXPOSE 8000
