@@ -2,6 +2,7 @@ module Tips.App
 
 open System
 open System.IO
+open Microsoft.AspNetCore.Authentication.JwtBearer;
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.AspNetCore.Hosting
@@ -10,14 +11,14 @@ open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open Tips.Router
 
-// let webApp =
-//     choose [
-//         subRoute "/api/v1/auth" (choose[
-//             POST  >=> route "/token" >=> text "{\"token\" :\"testToken\"}"
-//             GET   >=> route "/me" >=> text "{\"name\" :\"test\"}"
-//         ])
-//         GET >=> htmlFile "./assets/index.html" 
-//     ]
+
+let jwtOptions ( options :JwtBearerOptions) = 
+    do
+        options.TokenValidationParameters <- new TokenValidationParameters()
+        
+    ignore
+
+
 
 // ---------------------------------
 // Error handler
@@ -32,7 +33,7 @@ let errorHandler (ex : Exception) (logger : ILogger) =
 // ---------------------------------
 
 let configureCors (builder : CorsPolicyBuilder) =
-    builder.WithOrigins("http://localhost:8089")
+    builder.AllowAnyOrigin()
            .AllowAnyMethod()
            .AllowAnyHeader()
            |> ignore
@@ -50,6 +51,8 @@ let configureApp (app : IApplicationBuilder) =
 let configureServices (services : IServiceCollection) =
     services.AddCors()    |> ignore
     services.AddGiraffe() |> ignore
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(jwtOptions) |> ignore
 
 let configureLogging (builder : ILoggingBuilder) =
     let filter (l : LogLevel) = l.Equals LogLevel.Error

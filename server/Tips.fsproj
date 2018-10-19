@@ -19,7 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="*\*.fs" />
+    <Compile Include="Model\*.fs" />
+    <Compile Include="Service\*.fs" />
+    <Compile Include="Router\*.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
