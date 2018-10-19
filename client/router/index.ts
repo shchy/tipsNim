@@ -26,11 +26,17 @@ export default new Router({
     routes: [
         {
             path: '/',
-            components: {
-                default: () => import('@/views/debug.vue'),
-                side: () => import('@/views/side.vue'),
-                header: () => import('@/views/header.vue'),
-            },
+            component: () => import('@/component/layout.vue'),
+            children: [
+                {
+                    path: '',
+                    components: {
+                        default: () => import('@/views/debug.vue'),
+                        side: () => import('@/views/side.vue'),
+                        header: () => import('@/views/header.vue'),
+                    }
+                },
+            ],
             beforeEnter: isAuthed,
         },
         {

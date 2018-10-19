@@ -18,6 +18,8 @@
 
 <style scoped>
 .login-container {
+  height: 100vh;
+  width: 100vw;
   position: relative;
 }
 
