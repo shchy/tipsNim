@@ -1,7 +1,7 @@
 server/assets/dist/*
 server/bin
 server/obj
-
+publish
 
 **/node_modules
 **/dist
