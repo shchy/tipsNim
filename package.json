@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@types/smoothscroll-polyfill": "^0.3.0",
+    "fetch-interceptor": "^1.1.0",
     "smoothscroll-polyfill": "^0.4.3",
     "vue": "^2.5.17",
     "vue-property-decorator": "^7.2.0",

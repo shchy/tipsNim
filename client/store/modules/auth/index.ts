@@ -45,8 +45,14 @@ const actions: DefineActions<AuthActions, AuthState, AuthMutations, AuthGetters,
                     // example with axios
                     // axios.defaults.headers.common['Authorization'] = resp.token
                     commit('AUTH_SUCCESS', resp);
-                    dispatch('USER_REQUEST', {});
-                    resolve(resp);
+                    dispatch('USER_REQUEST', {})
+                        .then(_=> {
+                            resolve(resp);
+                        });
+                        // .catch(err => {
+                        //     console.log("test3");
+                        //     reject(err);        
+                        // });
                 })
                 .catch(err => {
                     commit('AUTH_ERROR', err)

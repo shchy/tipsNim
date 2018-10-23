@@ -75,39 +75,9 @@ export default class Login extends Vue {
         id: this.username,
         password: this.password
       })
-      .then(() => {
+      .then(resp => {
         this.$router.push("/");
       });
   }
-
-  // name: "Login",
-  // data() {
-  //   return {
-  //     username: "",
-  //     password: ""
-  //   };
-  // },
-  // methods: {
-  //   login: function() {
-
-  //     this.$store.dispatch<Dispatcher<AuthActions>>({
-  //       type: 'AUTH_REQUEST',
-  //       id: this.username,
-  //       password: this.password
-  //     })
-  //     .then(() => {
-  //       this.$router.push('/');
-  //     });
-  //   },
-  //   logout: function() {
-
-  //     this.$store.dispatch<Dispatcher<UserActions & AuthActions>>({
-  //       type: 'AUTH_LOGOUT',
-  //     })
-  //     .then(()=>{
-  //       this.$router.push('/login');
-  //     });
-  //   }
-  // }
 }
 </script>
