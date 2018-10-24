@@ -1,1 +1,1 @@
-dotnet run --project server
+dotnet ./publish/Tips.dll

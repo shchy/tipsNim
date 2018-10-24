@@ -4,6 +4,7 @@ open System
 open System.IO
 open System.Text
 open Microsoft.AspNetCore.Authentication.JwtBearer
+open System.Reflection
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.AspNetCore.Hosting
@@ -69,7 +70,7 @@ let configureLogging (builder : ILoggingBuilder) =
 
 [<EntryPoint>]
 let main _ =
-    let contentRoot = Directory.GetCurrentDirectory()
+    let contentRoot = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
     let webRoot     = Path.Combine(contentRoot, "assets/dist")
     let builder = 
         new ConfigurationBuilder()
