@@ -49,6 +49,7 @@ let configureCors (builder : CorsPolicyBuilder) =
 
 let configureApp (app : IApplicationBuilder) =
     let env = app.ApplicationServices.GetService<IHostingEnvironment>()
+    let root = new Root(Configuration)
     (match env.IsDevelopment() with
     | true  -> app.UseDeveloperExceptionPage()
     | false -> app.UseGiraffeErrorHandler errorHandler)
@@ -56,7 +57,7 @@ let configureApp (app : IApplicationBuilder) =
         .UseCors(configureCors)
         .UseStaticFiles()
         .UseAuthentication()
-        .UseGiraffe(Root.webApp)
+        .UseGiraffe(root.Handlers)
 
 let configureServices (services : IServiceCollection) =                                                
     services.AddCors()    |> ignore

@@ -1,7 +1,15 @@
 import FetchInterceptor from 'fetch-interceptor'
 
+
 const interceptor = FetchInterceptor.register({
     onBeforeRequest(request, controller) {
+        var token = localStorage.getItem('user-token');
+        var isEmpty = 
+            token === 'undefined' 
+            || token == null
+            || token == '';
+        if (!isEmpty) 
+            request.headers.append("Authorization", "Bearer " + token);
 
     },
     onRequestSuccess(responce, request, controller) {

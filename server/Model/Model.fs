@@ -5,9 +5,9 @@ open System
 [<CLIMutable>]
 type User =
     {
-        ID : int
+        ID: int
+        Email: string
         Name : string
-        AuthID : string
         Password : string
     }
 

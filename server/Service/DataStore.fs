@@ -61,7 +61,7 @@ type DebugDataStore () =
         { 
             ID = id 
             Name = x.Name 
-            AuthID = x.AuthID
+            Email = x.Email
             Password = x.Password
         })) 
     let projectCRUD = Crud<Project>((fun x -> x.ID), (fun id x -> 
@@ -90,7 +90,7 @@ type DebugDataStore () =
     do 
         let user = userCRUD.Create {
                 ID = -1
-                AuthID = "test"
+                Email = "test"
                 Name = "testUser"
                 Password = "test"
         }
