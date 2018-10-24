@@ -33,9 +33,9 @@ const mutations: DefineMutations<UserMutations, UserState> = {
 }
 
 const actions: DefineActions<UserActions, UserState, UserMutations, UserGetters, AuthActions> = {
-    USER_REQUEST: async ({ commit, dispatch, getters }) => {
+    USER_REQUEST: ({ commit, dispatch, getters }) => {
         commit('USER_REQUEST', {})
-        await authApi.getMe(getters.getProfile.name)
+        return authApi.getMe(getters.getProfile.name)
             .then(resp => {
                 commit('USER_SUCCESS', resp)
             })
