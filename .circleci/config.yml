@@ -10,7 +10,13 @@ jobs:
       - checkout
       - run:
           name: install commands 
-          command: apt update && apt install expect openssh-client jq -y
+          command: bash .circleci/install_dependencies.sh
+      - run:
+          name: build 
+          command: bash .circleci/build.sh
+      - run:
+          name: publish 
+          command: bash .circleci/publish.sh
       - run:
           name: deploy
           command: bash .circleci/deploy-ssh.sh
