@@ -4,7 +4,7 @@ tar -zcvf ${ARCHIVE} ./publish
 
 # make github release page
 
-VERSION=v0.0.2
+VERSION=v0.0.3
 OWNER=shchy
 REPO=tipsNim
 GITHUB_TOKEN=${github_token}
