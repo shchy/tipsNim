@@ -2,24 +2,33 @@ module Tips.App
 
 open System
 open System.IO
+open System.Text
+open Microsoft.AspNetCore.Authentication.JwtBearer
 open System.Reflection
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Cors.Infrastructure
 open Microsoft.AspNetCore.Hosting
+open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
+open Microsoft.IdentityModel.Tokens
 open Giraffe
 open Tips.Router
 
-// let webApp =
-//     choose [
-//         subRoute "/api/v1/auth" (choose[
-//             POST  >=> route "/token" >=> text "{\"token\" :\"testToken\"}"
-//             GET   >=> route "/me" >=> text "{\"name\" :\"test\"}"
-//         ])
-//         GET >=> htmlFile "./assets/index.html" 
-//     ]
+let mutable Configuration: IConfiguration = null
 
+let jwtOptions (options :JwtBearerOptions) = 
+    options.TokenValidationParameters <- new TokenValidationParameters(
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = Configuration.["Jwt:Issuer"],
+        ValidAudience = Configuration.["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.["Jwt:Key"]))
+    )
+    
+    
 // ---------------------------------
 // Error handler
 // ---------------------------------
@@ -33,24 +42,28 @@ let errorHandler (ex : Exception) (logger : ILogger) =
 // ---------------------------------
 
 let configureCors (builder : CorsPolicyBuilder) =
-    builder.WithOrigins("http://localhost:8089")
+    builder.AllowAnyOrigin()
            .AllowAnyMethod()
            .AllowAnyHeader()
            |> ignore
 
 let configureApp (app : IApplicationBuilder) =
     let env = app.ApplicationServices.GetService<IHostingEnvironment>()
+    let root = new Root(Configuration)
     (match env.IsDevelopment() with
     | true  -> app.UseDeveloperExceptionPage()
     | false -> app.UseGiraffeErrorHandler errorHandler)
         // .UseHttpsRedirection()
         .UseCors(configureCors)
         .UseStaticFiles()
-        .UseGiraffe(Root.webApp)
+        .UseAuthentication()
+        .UseGiraffe(root.Handlers)
 
-let configureServices (services : IServiceCollection) =
+let configureServices (services : IServiceCollection) =                                                
     services.AddCors()    |> ignore
     services.AddGiraffe() |> ignore
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(Action<JwtBearerOptions>(jwtOptions)) |> ignore
 
 let configureLogging (builder : ILoggingBuilder) =
     let filter (l : LogLevel) = l.Equals LogLevel.Error
@@ -60,6 +73,13 @@ let configureLogging (builder : ILoggingBuilder) =
 let main _ =
     let contentRoot = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
     let webRoot     = Path.Combine(contentRoot, "assets/dist")
+    let builder = 
+        new ConfigurationBuilder()
+    builder.SetBasePath(contentRoot) |> ignore
+    builder.AddJsonFile("appsettings.json", optional= false, reloadOnChange= true) |> ignore
+    builder.AddEnvironmentVariables() |> ignore
+    Configuration <- builder.Build() 
+    
     WebHostBuilder()
         .UseKestrel()
         .UseContentRoot(contentRoot)

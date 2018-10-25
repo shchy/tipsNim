@@ -1,8 +1,11 @@
 
 function getToken(user: { id: string, password: string }) {
-    console.log(user.id);
-    console.log(user.password);
-    return fetch("/api/v1/auth/token", { method: "POST" })
+    return fetch("/api/v1/auth/token",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: user.id, password: user.password })
+        })
         .then(resp => {
             if (!resp.ok) {
                 return Promise.reject(resp);

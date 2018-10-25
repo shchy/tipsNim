@@ -3,8 +3,8 @@
         <form @submit.prevent="login" >
           <h1>Sign in</h1>
 
-          <label>User Name</label>
-          <input required v-model="username" type="text" />
+          <label>Email</label>
+          <input required v-model="email" type="email" />
 
           <label>Password</label>
           <input required v-model="password" type="password" />
@@ -57,7 +57,7 @@ import { AuthActions } from "../store/modules/auth/if";
 @Component({})
 export default class Login extends Vue {
   // data
-  username: string = "";
+  email: string = "";
   password: string = "";
 
   // methods
@@ -72,42 +72,13 @@ export default class Login extends Vue {
     this.$store
       .dispatch<Dispatcher<AuthActions>>({
         type: "AUTH_REQUEST",
-        id: this.username,
+        id: this.email,
         password: this.password
       })
-      .then(() => {
+      .then(resp => {
         this.$router.push("/");
-      });
+      })
+      .catch(alert);
   }
-
-  // name: "Login",
-  // data() {
-  //   return {
-  //     username: "",
-  //     password: ""
-  //   };
-  // },
-  // methods: {
-  //   login: function() {
-
-  //     this.$store.dispatch<Dispatcher<AuthActions>>({
-  //       type: 'AUTH_REQUEST',
-  //       id: this.username,
-  //       password: this.password
-  //     })
-  //     .then(() => {
-  //       this.$router.push('/');
-  //     });
-  //   },
-  //   logout: function() {
-
-  //     this.$store.dispatch<Dispatcher<UserActions & AuthActions>>({
-  //       type: 'AUTH_LOGOUT',
-  //     })
-  //     .then(()=>{
-  //       this.$router.push('/login');
-  //     });
-  //   }
-  // }
 }
 </script>

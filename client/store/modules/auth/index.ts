@@ -38,15 +38,13 @@ const actions: DefineActions<AuthActions, AuthState, AuthMutations, AuthGetters,
         return new Promise((resolve, reject) => {
             commit('AUTH_REQUEST', {})
             authApi.getToken(user)
-                // apiCall({ url: 'auth', data: user, method: 'POST' })
                 .then(resp => {
                     localStorage.setItem('user-token', resp.token);
-                    // Here set the header of your ajax library to the token value.
-                    // example with axios
-                    // axios.defaults.headers.common['Authorization'] = resp.token
                     commit('AUTH_SUCCESS', resp);
-                    dispatch('USER_REQUEST', {});
-                    resolve(resp);
+                    dispatch('USER_REQUEST', {})
+                        .then(_=> {
+                            resolve(resp);
+                        });
                 })
                 .catch(err => {
                     commit('AUTH_ERROR', err)

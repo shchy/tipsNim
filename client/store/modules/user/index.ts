@@ -35,14 +35,15 @@ const mutations: DefineMutations<UserMutations, UserState> = {
 const actions: DefineActions<UserActions, UserState, UserMutations, UserGetters, AuthActions> = {
     USER_REQUEST: ({ commit, dispatch, getters }) => {
         commit('USER_REQUEST', {})
-        authApi.getMe(getters.getProfile.name)
+        return authApi.getMe(getters.getProfile.name)
             .then(resp => {
                 commit('USER_SUCCESS', resp)
             })
-            .catch(resp => {
+            .catch(err => {
                 commit('USER_ERROR', {})
                 // if resp is unauthorized, logout, to
                 dispatch('AUTH_LOGOUT', {})
+                throw err
             })
     },
 }

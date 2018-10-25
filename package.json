@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
+    "release": "webpack --mode production",
     "watch": "webpack -w",
     "start": "webpack-dev-server --no-inline"
   },
@@ -25,6 +26,7 @@
   },
   "dependencies": {
     "@types/smoothscroll-polyfill": "^0.3.0",
+    "fetch-interceptor": "^1.1.0",
     "smoothscroll-polyfill": "^0.4.3",
     "vue": "^2.5.17",
     "vue-property-decorator": "^7.2.0",
