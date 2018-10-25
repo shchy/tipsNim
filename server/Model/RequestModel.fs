@@ -5,7 +5,7 @@ open System
 [<CLIMutable>]
 type LoginModel =
     {
-        Id : string;
+        Email : string;
         Password : string;
     }
 

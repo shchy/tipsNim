@@ -24,8 +24,6 @@ open Tips.Model
 
 type Auth(config: IConfiguration) =
     let _config = config
-
-
     let return401 = (clearResponse >=> setStatusCode 401 >=> text "Must be Auth")
     let mustBeAuth: HttpHandler =
         fun (next : HttpFunc) (ctx : HttpContext) ->
@@ -45,11 +43,17 @@ type Auth(config: IConfiguration) =
             }
     
     let getUser (model: LoginModel) =
-        if model.Id = "test" && model.Password = "hoge" 
-        then Some { ID = 0; Email= model.Id; Name= "tester"; Password= model.Password }
+        if model.Email = "test@test" && model.Password = "hoge" 
+        then Some { ID = 0; Email= model.Email; Name= "tester"; Password= model.Password }
         else None
 
     let buildToken (user: User) =    
+        let claims = [
+            new Claim(JwtRegisteredClaimNames.Sub, user.Name);
+            new Claim(JwtRegisteredClaimNames.Email, user.Email);
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString());
+        ]
+
         let key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.["Jwt:Key"]));
         let creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         let expires = DateTime.Now.AddMinutes 30.0
@@ -57,22 +61,14 @@ type Auth(config: IConfiguration) =
             new JwtSecurityToken(
                 _config.["Jwt:Issuer"],
                 _config.["Jwt:Issuer"],
+                claims,
                 expires= new Nullable<DateTime>(expires),
                 signingCredentials= creds)
         let tokenHandler = new JwtSecurityTokenHandler()
         tokenHandler.WriteToken(token)
 
-    // let readAllBytes (s : Stream) = 
-    //     let ms = new MemoryStream()
-    //     s.CopyTo(ms)
-    //     ms.ToArray()
-
     let createToken: HttpHandler =
         fun (next : HttpFunc) (ctx : HttpContext) ->
-            // ctx.Request.Body
-            // |> readAllBytes
-            // |> Encoding.UTF8.GetString
-            // |> printfn "%s" 
             task {
                 let! model = ctx.BindJsonAsync<LoginModel>() 
                 return!
