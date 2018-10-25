@@ -7,7 +7,7 @@ curl -OL ${LATEST_URL}
 tar -zxvf tips.tar.gz
 rm tips.tar.gz
 
-jq '.Jwt.Key = "test"' publish/appsettings.json > temp.json
+jq '.Jwt.Key = "testtesttesttesttesttest"' publish/appsettings.json > temp.json
 cat temp.json > publish/appsettings.json
 rm temp.json
 
