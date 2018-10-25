@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: install commands 
-          command: echo $digital_ip && apt update && apt install expect openssh-client -y
+          command: apt update && apt install expect openssh-client jq -y
       - run:
           name: deploy
           command: bash .circleci/deploy-ssh.sh

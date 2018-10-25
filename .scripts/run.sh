@@ -1,1 +1,1 @@
-dotnet ./publish/Tips.dll
+./publish/Tips
