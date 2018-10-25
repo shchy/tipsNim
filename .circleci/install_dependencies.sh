@@ -14,4 +14,4 @@ curl -sL https://deb.nodesource.com/setup_8.x | bash -
 apt install nodejs git jq libunwind8 icu-devtools -y
 
 # install jq
-apt install tar git jq file basename -y
+apt install tar git jq file -y
