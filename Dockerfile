@@ -11,9 +11,8 @@ RUN apt install curl -y
 # RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 # RUN apt install nodejs -y
 # RUN apt install git -y
-# RUN apt install libunwind8 icu-devtools -y
 # RUN git clone https://github.com/shchy/tipsNim.git
-RUN apt install jq -y
+RUN apt install jq libunwind8 icu-devtools -y
 
 EXPOSE 8080 8081
 
