@@ -1,14 +1,13 @@
-# make tips.tar.gz
 ARCHIVE=./tips.tar.gz
-tar -zcvf ${ARCHIVE} ./publish
-
-# make github release page
-
 VERSION=${CIRCLE_TAG}
 OWNER=shchy
 REPO=tipsNim
 GITHUB_TOKEN=${github_token}
 
+# make tips.tar.gz
+tar -zcvf ${ARCHIVE} ./publish
+
+# make github release page
 INPUT="
 {
     \"tag_name\": \"${VERSION}\",
