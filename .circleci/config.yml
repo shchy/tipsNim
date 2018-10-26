@@ -5,9 +5,12 @@ jobs:
       - image: library/debian:stretch
     steps:
       - run:
+          name: install git
+          command: apt update && apt install git openssh
+      - checkout
+      - run:
           name: install commands 
           command: bash .circleci/install_dependencies.sh
-      - checkout
       - run:
           name: build 
           command: bash .circleci/build.sh
