@@ -7,7 +7,9 @@ curl -OL ${LATEST_URL}
 tar -zxvf tips.tar.gz
 rm tips.tar.gz
 
-jq '.Jwt.Key = "testtesttesttesttesttest"' publish/appsettings.json > temp.json
+SECRET_KEY=$(openssl rand -base64 32)
+
+jq '.Jwt.Key = "${SECRET_KEY}"' publish/appsettings.json > temp.json
 cat temp.json > publish/appsettings.json
 rm temp.json
 
