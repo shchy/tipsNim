@@ -6,7 +6,7 @@ jobs:
     steps:
       - run:
           name: install git
-          command: apt update && apt install git openssh
+          command: apt update && apt install git
       - checkout
       - run:
           name: install commands 
