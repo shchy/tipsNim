@@ -2,12 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: library/debian:stretch
     steps:
-      - checkout
       - run:
           name: install commands 
           command: bash .circleci/install_dependencies.sh
+      - checkout
       - run:
           name: build 
           command: bash .circleci/build.sh
