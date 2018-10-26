@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: debian:stretch
     branches:
-      only:	
+      only:
         - master
     steps:
       - checkout
