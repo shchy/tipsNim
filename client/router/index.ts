@@ -31,9 +31,9 @@ export default new Router({
                 {
                     path: '',
                     components: {
-                        default: () => import('@/views/debug.vue'),
                         side: () => import('@/views/side.vue'),
-                        header: () => import('@/views/header.vue'),
+                        default: () => import('@/views/home/home.vue'),
+                        header: () => import('@/views/home/header.vue'),
                     }
                 },
             ],

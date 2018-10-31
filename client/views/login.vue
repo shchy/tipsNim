@@ -4,10 +4,10 @@
           <h1>Sign in</h1>
 
           <label>Email</label>
-          <input required v-model="email" type="email" />
+          <input required v-model="email" name="email" autocomplete="email" type="email" />
 
           <label>Password</label>
-          <input required v-model="password" type="password" />
+          <input required v-model="password" name="password" autocomplete="password" type="password" />
 
           <div class="on-right">
             <button type="submit">Sign in</button>
