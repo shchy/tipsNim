@@ -2,7 +2,7 @@
     <div class="header-container">
         <ul>
             <li><router-link to="/"><icon type="fas fa-home" /></router-link></li>
-            <li><router-link to="/login"><span>not assign</span></router-link></li>
+            <li><router-link to="/login"><span>test</span></router-link></li>
         </ul>
     </div>
 </template>
