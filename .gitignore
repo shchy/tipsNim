@@ -1,8 +1,9 @@
-server/assets/dist/*
-server/bin
-server/obj
+**/bin
+**/obj
 publish
 
 **/node_modules
 **/dist
 **/.DS_Store
+
+.ionide
