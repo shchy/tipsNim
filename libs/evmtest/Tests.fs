@@ -2,7 +2,7 @@ namespace Evmtest
 
 open System
 open Microsoft.VisualStudio.TestTools.UnitTesting
-open evm
+open Evm
 
 [<TestClass>]
 type TestClass () =

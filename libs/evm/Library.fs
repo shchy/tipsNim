@@ -1,4 +1,4 @@
-﻿namespace evm
+﻿namespace Evm
 
 module Say =
     let hello name =
