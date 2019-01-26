@@ -9,5 +9,5 @@ type TestClass () =
 
     [<TestMethod>]
     member this.TestMethodPassing () =
-        Say.hello "tester"
+        // Say.hello "tester"
         Assert.IsTrue(true);

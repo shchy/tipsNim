@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/server/bin/Debug/netcoreapp2.1/Tips.dll",
+            "program": "${workspaceFolder}/libs/sandbox/bin/Debug/netcoreapp2.1/sandbox.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
